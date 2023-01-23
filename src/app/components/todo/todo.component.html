@@ -1,0 +1,29 @@
+<div class="card shadow-lg mt-5">
+  <div class="card-header text-center py-4 border-0">
+    <h1 class="display-6 fw-bold">Todo List</h1>
+  </div>
+  <div class="card-body p-4">
+    <ul class="list-group">
+      <li class="list-group-item mb-2 border py-0 rounded-3">
+        <form (ngSubmit)="formSubmit()" class="input-group">
+          <input type="text" class="form-control border-0 py-3 shadow-none"
+            [(ngModel)]="todoTitle" (focus)="this.todoTitle = ''"
+            placeholder="What needs to be done?">
+          <button type="submit" class="btn text-success border-0">
+            <i class="fa-solid fa-circle-plus fa-xl"></i>
+          </button>
+        </form>
+      </li>
+      <li class="list-group-item mb-2 border py-3 rounded-3" *ngFor="let item of todos; let i = index">
+        <span>
+          <i class="text-success" (click)="updateHandle(i)"
+            [(ngClass)]="item.isDone ? 'fa-solid fa-icon-check' : 'fa-regular fa-cirle'"></i>
+          {{ item.title }}
+          <span class="float-end text-secondary">
+            <i class="fa-solid fa-trash-can"></i>
+          </span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
