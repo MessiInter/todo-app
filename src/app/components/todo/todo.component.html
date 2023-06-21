@@ -5,21 +5,21 @@
   <div class="card-body p-4">
     <ul class="list-group">
       <li class="list-group-item mb-2 border py-0 rounded-3">
-        <form (ngSubmit)="formSubmit()" class="input-group">
+        <div class="input-group">
           <input type="text" class="form-control border-0 py-3 shadow-none"
-            [(ngModel)]="todoTitle" (focus)="this.todoTitle = ''"
+            [(ngModel)]="todoTitle" (focus)="todoTitle = ''"
             placeholder="What needs to be done?">
-          <button type="submit" class="btn text-success border-0">
+          <button class="btn text-success border-0" (click)="formSubmit()">
             <i class="fa-solid fa-circle-plus fa-xl"></i>
           </button>
-        </form>
+        </div>
       </li>
       <li class="list-group-item mb-2 border py-3 rounded-3" *ngFor="let item of todos; let i = index">
         <span>
-          <i class="text-success" (click)="updateHandle(i)"
-            [(ngClass)]="item.isDone ? 'fa-solid fa-icon-check' : 'fa-regular fa-cirle'"></i>
+          <i class="text-success" (click)="updateHandle(i, !item.isDone)"
+            [ngClass]="item.isDone ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle'"></i>
           {{ item.title }}
-          <span class="float-end text-secondary">
+          <span class="float-end text-secondary" (click)="deleteHandle(i)">
             <i class="fa-solid fa-trash-can"></i>
           </span>
         </span>

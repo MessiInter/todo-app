@@ -30,8 +30,8 @@ export class TodoService {
   
   updateStatus(arr: TodoInterface[], index: number, status: boolean): void {
     if (index !== -1) {
-      let { isDone } = arr[index];
-      isDone = status === isDone ? isDone : status;
+      let data = arr[index];
+      data.isDone = status === data.isDone ? data.isDone : status;
       this.saveTodo(arr);
     }
   }

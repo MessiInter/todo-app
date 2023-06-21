@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../../services/todo/todo.service';
 import { TodoInterface } from '../../shared/todo/todo.interface';
 
@@ -8,7 +8,7 @@ import { TodoInterface } from '../../shared/todo/todo.interface';
   styleUrls: ['./todo.component.css']
 })
 
-export class TodoComponent {
+export class TodoComponent implements OnInit {
   constructor(private todoService: TodoService) { }
   
   todos: TodoInterface[] = []
@@ -21,8 +21,13 @@ export class TodoComponent {
   deleteHandle(index: number): void {
     this.todoService.removeTodo(this.todos, index);
   }
-  updateHandle(index: number) {
-    const newStatus: boolean = !this.todos[index].isDone;
-    this.todoService.updateStatus(this.todos, index, newStatus);
+  
+  updateHandle(index: number, status: boolean) {
+    this.todoService.updateStatus(this.todos, index, status);
+  }
+  
+  ngOnInit(): void {
+    const savedTodos = localStorage.getItem('todos');
+    this.todos = JSON.parse(savedTodos as string) || [];
   }
 }
